@@ -7,71 +7,66 @@
 
 import Foundation
 
-func add(_ a: Double, _ b: Double) -> Double {
-    return a + b
-}
-
-func subtract(_ a: Double, _ b: Double) -> Double {
-    return a - b
-}
-
-func multiply(_ a: Double, _ b: Double) -> Double {
-    return a * b
-}
-
-func divide(_ a: Double, _ b: Double) -> Double? {
-    guard b != 0 else {
-        print("Error: Cannot divide by zero.")
-        return nil
-    }
-    return a / b
-}
-
-func power(_ base: Double, _ exponent: Double) -> Double {
-    return pow(base, exponent)
-}
-
-func calculate() {
-    print("Enter the first number:")
-    guard let num1 = Double(readLine() ?? "") else {
-        print("Error: Invalid input for the first number.")
-        return
-    }
-
-    print("Enter the operator (+, -, *, /, ^):")
-    guard let operatorInput = readLine(), let operation = operatorInput.first else {
-        print("Error: Invalid input for the operator.")
-        return
-    }
+func combineStrings() {
+    print("Enter the first line:")
+    let line1 = readLine() ?? ""
     
-    print("Enter the second number:")
-    guard let num2 = Double(readLine() ?? "") else {
-        print("Error: Invalid input for the second number.")
-        return
-    }
+    print("Enter the second line:")
+    let line2 = readLine() ?? ""
+    
+    let combinedString = line1 + line2
+    print("Combined String: \(combinedString)")
+}
 
-    var result: Double?
+func flipString() {
+    print("Enter a string:")
+    let inputString = readLine() ?? ""
+    
+    let reversedString = String(inputString.reversed())
+    print("Reversed String: \(reversedString)")
+}
 
-    switch operation {
-    case "+":
-        result = add(num1, num2)
-    case "-":
-        result = subtract(num1, num2)
-    case "*":
-        result = multiply(num1, num2)
-    case "/":
-        result = divide(num1, num2)
-    case "^":
-        result = power(num1, num2)
-    default:
-        print("Error: Unsupported operator.")
-        return
-    }
+func countCharacters() {
+    print("Enter a string:")
+    let inputString = readLine() ?? ""
+    
+    let characterCount = inputString.replacingOccurrences(of: " ", with: "").count
+    print("Character Count (excluding spaces): \(characterCount)")
+}
 
-    if let finalResult = result {
-        print("Result: \(finalResult)")
+func searchSubstring() {
+    print("Enter the string:")
+    let inputString = readLine() ?? ""
+    
+    print("Enter the substring to search for:")
+    let substring = readLine() ?? ""
+    
+    if let range = inputString.range(of: substring) {
+        let index = inputString.distance(from: inputString.startIndex, to: range.lowerBound)
+        print("Substring found at index: \(index)")
+    } else {
+        print("Substring not found in the string.")
     }
 }
 
-calculate()
+print("1. Combine Strings")
+print("2. Flip a String")
+print("3. Count Characters")
+print("4. Search for Substring")
 
+if let choice = readLine(), let option = Int(choice) {
+    switch option {
+    case 1:
+        combineStrings()
+    case 2:
+        flipString()
+    case 3:
+        countCharacters()
+    case 4:
+        searchSubstring()
+    default:
+        print("Invalid option.")
+    }
+} else {
+    print("Invalid input.")
+}
